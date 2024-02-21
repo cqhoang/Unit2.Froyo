@@ -3,54 +3,31 @@ const userInputString = prompt("Please enter a list of froyo flavors.");
 
 // Split the user's input into an array of strings
 const flavors = userInputString.split(",");
+console.log(flavors);
 
-// Use a loop to iterate through the array of flavors
-for (let i = 0; i < flavors.length; i++) {
-  console.log(flavors[i]);
-}
-
-// Count the number of orders for each flavor
-function countFlavorOrders(flavors) {
-  let countFlavorsOrders = {};
-  if (countFlavorsOrders[flavors]) {
-    flavorCountOrders[flavors]++;
-  } else {
-    flavorCountOrders[flavors] = 1;
+// Count flavors
+function countFlavors(flavors) {
+  let countFlavors = {};
+  for (let i = 0; i < flavors.length; i++) {
+    // trim space from flavor
+    const trimmedFlavor = flavors[i].trim();
+    if (countFlavors[flavors[i]]) {
+      countFlavors[flavors[i]] += 1;
+    } else {
+      countFlavors[flavors[i]] = 1;
+    }
   }
+  return countFlavors;
 }
 
-for (let flavors in countFlavorOrders) {
-  console.log(
-    `Thank you for ordering ${countFlavorsOrders[flavors]} of ${flavors} flavor(s).`
-  );
+const flavorCounts = countFlavors(flavors);
+
+// Change console output based on user input
+let totalCount = 0;
+for (let flavor in flavorCounts) {
+  totalCount += flavorCounts[flavor];
 }
+console.log(`You have placed ${totalCount} order(s) of froyo.`);
 
-// Count the number of each flavor in the user's input
-
-// Display object in a table
-console.table(flavors);
-
-//  First attempt below:
-// const flavors = ["vanilla", "strawberry", "coffee"];
-
-// const orders = [
-//   "vanilla",
-//   "vanilla",
-//   "vanilla",
-//   "strawberry",
-//   "coffee",
-//   "coffee",
-// ];
-
-// const flavorscount = {};
-
-// for (let i = 0; i < orders.length; i++) {
-//     const flavors = orders[i];
-//     if
-// }
-
-// const flavors = {
-//   vanilla: 3,
-//   strawberry: 1,
-//   coffee: 2,
-// };
+// display in a table
+console.table(flavorCounts);
